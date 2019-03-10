@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BP</title>
+<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/css/datepicker3.css" rel="stylesheet">
+<link href="/static/css/styles.css" rel="stylesheet">
+    <style>
+        table {
+            position: absolute;
+            left:80px;
+            margin:50px;
+         border-collapse: collapse;
+         font-family: Futura, Arial, sans-serif;
+        }
+        caption {
+             font-size: larger;
+             margin: 1em auto;
+        }
+
+        th,td {
+             padding: .65em;
+        }
+
+        th,td {
+               border-bottom: 1px solid #ddd;
+               border-top: 1px solid #ddd;
+               text-align: center;
+        }
+        #imgshow{
+            position:absolute;
+            width: 400px;
+            height: 400px;
+            left:600px;
+            margin:0px;
+            background: #666666;
+        }
+
+        tbody tr:hover {
+
+             background: linear-gradient(#fff, #428bca);
+             font-size: 17px;
+        }
+         button {
+             position: absolute;
+             left:0px;
+             margin:500px;
+                width: 80px;
+                padding:8px;
+                background-color: #428bca;
+                border-color: #357ebd;
+                color: #fff;
+                -moz-border-radius: 10px;
+                -webkit-border-radius: 10px;
+                border-radius: 10px; /* future proofing */
+                -khtml-border-radius: 10px; /* for old Konqueror browsers */
+                text-align: center;
+                vertical-align: middle;
+                border: 1px solid transparent;
+                font-weight: 900;
+                font-size:125%
+      }
+    </style>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><span>Welcome To </span>BP</a>
+				<ul class="user-menu">
+					<li class="dropdown pull-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> User <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+							<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li class="active"><a href="index.html"><span class="glyphicon glyphicon-dashboard"></span>Create Ntwork</a></li>
+			<li><a href="/square"><span class="glyphicon glyphicon-th"></span>y=x**2</a></li>
+			<li><a href="/sin"><span class="glyphicon glyphicon-stats"></span>y=sin(x)</a></li>
+			<li><a href="/two"><span class="glyphicon glyphicon-list-alt"></span>y=x1+x2</a></li>
+		</ul>
+	</div>
+    <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+        <table id="tb1">
+        <tr><td></td><td>该层神经元数</td>
+        <tr>
+            <td>第一层：</td>
+            <td><input type="number" class="num" value="1" id="id1"></td>
+        </tr>
+        <tr>
+            <td>第二层：</td>
+            <td><input type="number" class="num" id="id2"></td>
+
+        </tr>
+
+        <tr>
+            <td>第三层：</td>
+            <td><input type="number" class="num" id="id3"></td>
+        </tr>
+        <tr>
+            <td>第四层：</td>
+            <td><input type="number"  class="num" id="id4"></td>
+        </tr>
+        <tr>
+            <td>第五层：</td>
+            <td><input type="number"  class="num" id="id5"></td>
+        </tr>
+
+        <tr>
+            <td>第六层：</td>
+            <td><input type="number"  class="num" id="id6"></td>
+        </tr>
+        <tr>
+            <td>第七层：</td>
+            <td><input type="number"  class="num" id="id7"></td>
+            <br>
+        </tr>
+        <tr>
+            <td>第八层：</td>
+            <td><input type="number"  class="num" id="id8"></td>
+        </tr>
+        </table>
+        <br><br>
+        <button onclick="getnum()" >生成</button>
+        <div id="imgshow"></div>
+	</div>
+    <footer>
+	<script src="/static/js/jquery-1.11.1.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/bootstrap-datepicker.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            function getnum() {
+                var i=1;
+                nums=new Array();
+                for(;i<=8;i++){
+                    var name='id'+i;
+                    num=document.getElementById(name).value;
+                    if(num) {
+                        nums.push(num);
+                    }
+                }
+                postdata(nums);
+            }
+            function postdata(nums){
+                var a = JSON.stringify(nums);
+                $.ajax({
+                    type:'POST',
+                    data:a,
+                    url:'/getdata',
+                    success:function(data){
+                        $("#imgshow").html('<img width=400px height=400px src="data:image/png;base64,'+data+'"class="inline"/>')
+                    },
+                    error:function(e){
+                        alert("发送失败");
+                    }
+            });
+            }
+        </script>
+    </footer>
+</body>
+</html>

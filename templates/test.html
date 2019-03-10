@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+</head>
+<body>
+
+
+<div id="myDiv"></div>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+            var trace3 = {
+                  x: [1, 2, 3, 4],
+                  y: [12, 9, 15, 12],
+                  mode: 'lines+markers+text',
+                  type: 'scatter',
+                  text: ['B-a', 'B-b', 'B-c', 'B-d'],
+                  textfont : {
+                    family:'Times New Roman',
+                      size:15,
+                      color:'red',
+                  },
+                  textposition: 'bottom center',
+                  marker: { size: 20 },
+            };
+            var layout = {
+                  xaxis: {
+                    range: [0, 5 ],
+                      showgrid:false,
+                      showbackground:False,
+                      showline:False,
+                      zeroline:False,
+                      //showgrid:False,
+                      showticklabels:False,
+                  },
+                  yaxis: {
+                      range: [8,15],
+                      showbackground:False,
+                      showline:False,
+                      zeroline:False,
+                      showgrid:False,
+                      showticklabels:False,
+                  },
+                  legend: {
+                    y: 0.5,
+                    yref: 'paper',
+                    font: {
+                      family: 'Arial, sans-serif',
+                      size: 20,
+                      color: 'red',
+                    }
+                  },
+                  title:'Data Labels on the Plot'
+                };
+            var data = [trace3];
+            Plotly.newPlot('myDiv', data,layout);
+
+</script>
+
+</body>
+</html>
